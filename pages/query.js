@@ -1,5 +1,6 @@
 import React from 'react'
-import client from '../api/client';
+import client from '../api/client'
+import Editor from '../components/Editor'
 
 export default class Query extends React.Component {
 
@@ -10,7 +11,14 @@ export default class Query extends React.Component {
     '\n' +
     '\t}\n' +
     '}',
-    responseBody: ''
+    responseBody: '',
+    editor_is_visible: false
+  }
+
+  componentDidMount() {
+     this.setState({
+         editor_is_visible: true
+     })
   }
 
   handleQueryChange = event => {
@@ -18,8 +26,6 @@ export default class Query extends React.Component {
       query: event.target.value
     });
   }
-
-
 
   handleQueryFire = async () => {
     const responseBody = await client.search(JSON.parse(this.state.query));
@@ -30,7 +36,13 @@ export default class Query extends React.Component {
     return (
       <div>
         <div>
-          <textarea onChange={this.handleQueryChange} value={this.state.query} rows={10} cols={70}/>
+          {this.state.editor_is_visible && <Editor
+            mode="json"
+            theme="github"
+            value={this.state.query}
+            onChange={this.handleQueryChange}
+            maxLines={15}
+          />}
           <br/>
           <button onClick={this.handleQueryFire}>Query!</button>
         </div>
