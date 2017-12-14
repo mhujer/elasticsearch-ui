@@ -23,10 +23,16 @@ export default class App extends React.Component {
       <div>
         {
           this.state.data.map(item =>
-            <div>
+            <div key={item.uuid}>
               <h1>{item.index}</h1>
-              <div></div>
-              <small>{item.health}</small>
+              <div className={`status-${item.health}`}>{item.health}</div>
+              <p>
+                {item['docs.count']} documents in {item['store.size']}
+              </p>
+              <p>
+                Primary shards: {item['pri']},
+                replicas: {item['rep']}
+              </p>
             </div>
           )
         }
