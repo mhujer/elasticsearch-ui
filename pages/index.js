@@ -2,6 +2,7 @@ import React from 'react'
 import elasticsearch from 'elasticsearch'
 
 import CustomHead from '../components/Header'
+import Menu from '../components/Menu';
 
 
 export default class App extends React.Component {
@@ -24,7 +25,8 @@ export default class App extends React.Component {
     return (
       <div>
         <CustomHead/>
-        <div className="container container-responsive">
+        <div className="container-fluid">
+          <Menu active="index"/>
           {
             this.state.data.map(item =>
               <div key={item.uuid}>
