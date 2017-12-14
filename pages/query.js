@@ -62,7 +62,7 @@ export default class Query extends React.Component {
               <br/>
               <button onClick={this.handleQueryFire} className="btn btn-success">Query!</button>
             </div>
-            <div className="col-6" style={{overflowY: 'scroll', maxHeight: '600px'}}>
+            <div className="col-6" style={{overflowY: 'scroll', maxHeight: '500px'}}>
               {
                 this.state.error && <div className="error">{this.state.error}</div>
               }
