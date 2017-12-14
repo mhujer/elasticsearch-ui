@@ -1,10 +1,16 @@
+import Link from 'next/link'
+
 export default (props) => (
   <ul className="nav nav-pills">
     <li className="nav-item">
-      <a className={`nav-link ${props.active === 'index' ? 'active' : ''}`} href="/">Status</a>
+      <Link href="/">
+        <a className={`nav-link ${props.active === 'index' ? 'active' : ''}`}>Status</a>
+      </Link>
     </li>
     <li className="nav-item">
-      <a className={`nav-link ${props.active === 'query' ? 'active' : ''}`} href="/query">Query UI</a>
+      <Link href="/query">
+        <a className={`nav-link ${props.active === 'query' ? 'active' : ''}`} >Query UI</a>
+      </Link>
     </li>
   </ul>
 );
