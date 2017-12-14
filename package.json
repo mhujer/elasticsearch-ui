@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "elasticsearch": "^14.0.0",
     "next": "^4.2.1",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
