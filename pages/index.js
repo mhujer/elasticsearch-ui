@@ -3,14 +3,13 @@ let client = new elasticsearch.Client({
 	host: '127.0.0.1:9200',
 	log: 'trace'
 });
-client.ping({
+const response = client.info({
 	requestTimeout: 30000,
-}, function (error) {
-	if (error) {
-		console.error('elasticsearch cluster is down!');
-	} else {
-		console.log('All is well');
-	}
 });
+
+response.then((res) => {
+	console.dir(res);
+});
+
 
 export default () => <div>Welcome to next.js!</div>
