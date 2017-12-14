@@ -3,6 +3,7 @@ import elasticsearch from 'elasticsearch'
 
 import CustomHead from '../components/Header'
 import Menu from '../components/Menu';
+import IndexHealthBadge from '../components/IndexHealthBadge';
 
 
 export default class App extends React.Component {
@@ -27,21 +28,29 @@ export default class App extends React.Component {
         <CustomHead/>
         <div className="container-fluid">
           <Menu active="index"/>
-          {
-            this.state.data.map(item =>
-              <div key={item.uuid}>
-                <h1>{item.index}</h1>
-                <div className={`status-${item.health}`}>{item.health}</div>
-                <p>
-                  {item['docs.count']} documents in {item['store.size']}
-                </p>
-                <p>
-                  Primary shards: {item['pri']},
-                  replicas: {item['rep']}
-                </p>
-              </div>
-            )
-          }
+          <div className="row">
+            {
+              this.state.data.map(item =>
+                <div key={item.uuid} className="col-sm-4">
+                  <div className="card">
+                    <div className="card-block">
+                      <h3 className="card-title">
+                        {item.index} &nbsp;
+                        <IndexHealthBadge health={item.health}/>
+                        </h3>
+                      <p className="card-text">
+                        {item['docs.count']} documents in {item['store.size']}
+                      </p>
+                      <p className="card-text">
+                        Primary shards: {item['pri']},
+                        replicas: {item['rep']}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+          </div>
 
           <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
         </div>
