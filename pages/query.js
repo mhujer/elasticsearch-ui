@@ -1,5 +1,6 @@
 import React from 'react'
 import client from '../api/client';
+import CustomHead from '../components/Header'
 
 export default class Query extends React.Component {
 
@@ -38,23 +39,27 @@ export default class Query extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <textarea onChange={this.handleQueryChange} value={this.state.query} rows={10} cols={70}/>
-          <br/>
-          <button onClick={this.handleQueryFire}>Query!</button>
-        </div>
-        {
-          this.state.error && <div className="error">{this.state.error}</div>
-        }
-        {
-          this.state.responseBody &&
+        <CustomHead/>
+        <div className="container container-responsive">
+
           <div>
+            <textarea onChange={this.handleQueryChange} value={this.state.query} rows={10} cols={70}/>
+            <br/>
+            <button onClick={this.handleQueryFire}>Query!</button>
+          </div>
+          {
+            this.state.error && <div className="error">{this.state.error}</div>
+          }
+          {
+            this.state.responseBody &&
+            <div>
             <pre>
               {JSON.stringify(this.state.responseBody, null, 2)}
             </pre>
-          </div>
-        }
+            </div>
+          }
 
+        </div>
       </div>
     )
   }
