@@ -10,7 +10,8 @@ export default class Query extends React.Component {
     '\n' +
     '\t}\n' +
     '}',
-    responseBody: ''
+    responseBody: '',
+    error: null
   }
 
   handleQueryChange = event => {
@@ -19,11 +20,19 @@ export default class Query extends React.Component {
     });
   }
 
-
-
   handleQueryFire = async () => {
-    const responseBody = await client.search(JSON.parse(this.state.query));
-    this.setState({responseBody});
+    this.setState({
+      responseBody: '',
+      error: null
+    })
+    try {
+      const responseBody = await client.search(JSON.parse(this.state.query));
+      this.setState({responseBody});
+    } catch (e) {
+      this.setState({
+        error: e.message
+      });
+    }
   }
 
   render() {
@@ -34,11 +43,18 @@ export default class Query extends React.Component {
           <br/>
           <button onClick={this.handleQueryFire}>Query!</button>
         </div>
-        <div>
-          <pre>
-            {JSON.stringify(this.state.responseBody, null, 2)}
-          </pre>
-        </div>
+        {
+          this.state.error && <div className="error">{this.state.error}</div>
+        }
+        {
+          this.state.responseBody &&
+          <div>
+            <pre>
+              {JSON.stringify(this.state.responseBody, null, 2)}
+            </pre>
+          </div>
+        }
+
       </div>
     )
   }
