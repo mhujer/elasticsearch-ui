@@ -46,31 +46,34 @@ export default class Query extends React.Component {
     return (
       <div>
         <CustomHead/>
-        <div className="container container-responsive">
+        <div className="container-fluid">
+          <div className="row">
 
-          <div>
-            {this.state.editor_is_visible && <Editor
-              mode="json"
-              theme="github"
-              value={this.state.query}
-              onChange={this.handleQueryChange}
-              maxLines={15}
-            />}
-            <br/>
-            <button onClick={this.handleQueryFire}>Query!</button>
-          </div>
-          {
-            this.state.error && <div className="error">{this.state.error}</div>
-          }
-          {
-            this.state.responseBody &&
-            <div>
-            <pre>
-              {JSON.stringify(this.state.responseBody, null, 2)}
-            </pre>
+            <div className="col-6">
+              {this.state.editor_is_visible && <Editor
+                mode="json"
+                theme="github"
+                value={this.state.query}
+                onChange={this.handleQueryChange}
+                maxLines={15}
+              />}
+              <br/>
+              <button onClick={this.handleQueryFire}>Query!</button>
             </div>
-          }
-
+            <div className="col-6" style={{overflowY: 'scroll', maxHeight: '600px'}}>
+              {
+                this.state.error && <div className="error">{this.state.error}</div>
+              }
+              {
+                this.state.responseBody &&
+                <div>
+                  <pre>
+                    {JSON.stringify(this.state.responseBody, null, 2)}
+                  </pre>
+                </div>
+              }
+            </div>
+          </div>
         </div>
       </div>
     )
