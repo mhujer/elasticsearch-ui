@@ -34,16 +34,27 @@ export default class App extends React.Component {
                 <div key={item.uuid} className="col-sm-4">
                   <div className="card">
                     <div className="card-block">
-                      <h3 className="card-title">
+                      <h4 className="card-title">
                         {item.index} &nbsp;
                         <IndexHealthBadge health={item.health}/>
-                        </h3>
+                      </h4>
                       <p className="card-text">
-                        {item['docs.count']} documents in {item['store.size']}
+                        <span className="badge badge-primary">
+                          {item['docs.count']} documents
+                        </span>
+                        &nbsp;
+                        <span className="badge badge-primary">
+                          {item['store.size']}
+                        </span>
                       </p>
                       <p className="card-text">
-                        Primary shards: {item['pri']},
-                        replicas: {item['rep']}
+                        <span className="badge badge-pill badge-default">
+                          Primary shards: {item['pri']}
+                        </span>
+                        &nbsp;
+                        <span className="badge badge-pill badge-default">
+                          Replicas: {item['rep']}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -52,7 +63,7 @@ export default class App extends React.Component {
             }
           </div>
 
-          <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
+          {/*<pre>{JSON.stringify(this.state.data, null, 2)}</pre>*/}
         </div>
       </div>
     )

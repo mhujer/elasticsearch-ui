@@ -7,6 +7,11 @@ export default (props) => (
       body {
         margin: 1rem;
       }
+
+      .ournavmenu {
+        margin-bottom: 1em;
+      }
+
     `}</style>
   </Head>
 )
