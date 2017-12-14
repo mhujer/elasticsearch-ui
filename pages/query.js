@@ -3,6 +3,8 @@ import client from '../api/client';
 import CustomHead from '../components/Header'
 import Editor from '../components/Editor'
 import Menu from '../components/Menu';
+//import ReactJson from 'react-json-view'
+let ReactJson = null
 
 export default class Query extends React.Component {
 
@@ -19,6 +21,7 @@ export default class Query extends React.Component {
   }
 
   componentDidMount() {
+    ReactJson = require('react-json-view').default
     this.setState({
       editor_is_visible: true
     })
@@ -67,11 +70,9 @@ export default class Query extends React.Component {
                 this.state.error && <div className="error">{this.state.error}</div>
               }
               {
-                this.state.responseBody &&
+                ReactJson && this.state.editor_is_visible && this.state.responseBody &&
                 <div>
-                  <pre>
-                    {JSON.stringify(this.state.responseBody, null, 2)}
-                  </pre>
+                  <ReactJson src={this.state.responseBody} />
                 </div>
               }
             </div>
