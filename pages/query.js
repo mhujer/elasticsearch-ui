@@ -2,7 +2,6 @@ import React from 'react'
 import client from '../api/client';
 import CustomHead from '../components/Header'
 import Editor from '../components/Editor'
-import Menu from '../components/Menu';
 
 export default class Query extends React.Component {
 
@@ -25,6 +24,11 @@ export default class Query extends React.Component {
   }
 
   handleQueryChange = query => {
+    try {
+        const o = JSON.parse(query)
+        query = JSON.stringify(o, null, "\t")
+    } catch (e) {
+    }
     this.setState({query});
   }
 
@@ -48,7 +52,6 @@ export default class Query extends React.Component {
       <div>
         <CustomHead/>
         <div className="container-fluid">
-          <Menu active="query"/>
           <div className="row">
 
             <div className="col-6">
