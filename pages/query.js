@@ -1,6 +1,7 @@
 import React from 'react'
 import client from '../api/client';
 import CustomHead from '../components/Header'
+import Editor from '../components/Editor'
 
 export default class Query extends React.Component {
 
@@ -12,7 +13,14 @@ export default class Query extends React.Component {
     '\t}\n' +
     '}',
     responseBody: '',
-    error: null
+    error: null,
+    editor_is_visible: false
+  }
+
+  componentDidMount() {
+    this.setState({
+      editor_is_visible: true
+    })
   }
 
   handleQueryChange = event => {
@@ -43,7 +51,13 @@ export default class Query extends React.Component {
         <div className="container container-responsive">
 
           <div>
-            <textarea onChange={this.handleQueryChange} value={this.state.query} rows={10} cols={70}/>
+            {this.state.editor_is_visible && <Editor
+              mode="json"
+              theme="github"
+              value={this.state.query}
+              onChange={this.handleQueryChange}
+              maxLines={15}
+            />}
             <br/>
             <button onClick={this.handleQueryFire}>Query!</button>
           </div>
