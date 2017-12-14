@@ -21,10 +21,8 @@ export default class Query extends React.Component {
      })
   }
 
-  handleQueryChange = event => {
-    this.setState({
-      query: event.target.value
-    });
+  handleQueryChange = query => {
+    this.setState({query});
   }
 
   handleQueryFire = async () => {
